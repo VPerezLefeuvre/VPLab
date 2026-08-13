@@ -36,5 +36,20 @@ services:
     depends_on:
       - db
 
+  frontend:
+    build: ./frontend
+    container_name: vplab-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      BACKEND_INTERNAL_URL: http://vplab-backend:8080
+      NEXT_PUBLIC_API_URL: http://localhost:8080
+    depends_on:
+      backend:
+        condition: service_healthy
+
 volumes:
   postgres_data:
