@@ -1,0 +1,47 @@
+server:
+  port: ${PORT}
+
+spring:
+  application:
+    name: vplab-backend
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL}
+    show-sql: ${SHOW_SQL}
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: alpha
+
+app:
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS}
+
+logging:
+  level:
+    root: INFO
+    fr.vpl: DEBUG
+    org.hibernate.orm.jdbc.bind: WARN
